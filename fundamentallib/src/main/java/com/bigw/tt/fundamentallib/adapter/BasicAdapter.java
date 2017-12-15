@@ -48,7 +48,11 @@ public class BasicAdapter extends RecyclerView.Adapter<BasicViewHolder> {
     @Override
     public int getItemViewType(int position) {
         Class itemClass = mDataList.get(position).getClass();
-        return viewHolderInfoManager.getViewType(itemClass);
+        int viewType = viewHolderInfoManager.getViewType(itemClass);
+        if (viewType <= 0) {
+            throw new RuntimeException("this item " + itemClass + " has not been registered");
+        }
+        return viewType;
     }
 
 }

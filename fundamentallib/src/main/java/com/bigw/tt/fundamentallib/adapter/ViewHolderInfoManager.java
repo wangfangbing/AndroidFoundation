@@ -55,10 +55,10 @@ public class ViewHolderInfoManager {
 
     public int getViewType(@NonNull Class itemClass) {
         Node node = getViewHolderInfo(itemClass);
-        if (node == null) {
-            throw new RuntimeException("this item " + itemClass + " has not been registered");
+        if (node != null) {
+            return node.id;
         }
-        return node.id;
+        return -1;
     }
 
     public Node getViewHolderInfo(@NonNull Class itemClass) {
