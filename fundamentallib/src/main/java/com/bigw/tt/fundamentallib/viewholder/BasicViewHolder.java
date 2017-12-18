@@ -9,27 +9,37 @@ import android.view.ViewGroup;
  * Created by bigw on 13/12/2017.
  */
 
-public class BasicViewHolder extends RecyclerView.ViewHolder {
+public abstract class BasicViewHolder<Item, Listener extends BasicViewHolder.ActionListener> extends RecyclerView.ViewHolder {
 
-    private ActionListener mActionListener;
+    private Listener mActionListener;
 
-    public interface ViewHolderFactory<T extends BasicViewHolder> {
-        T createViewHolder(LayoutInflater inflater, ViewGroup parent);
-    }
+    private Item mItem;
 
     public interface ActionListener {
         //empty listener
+    }
+
+    public void setActionListener(Listener listener) {
+        this.mActionListener = listener;
+    }
+
+    public Listener getActionListener() {
+        return mActionListener;
+    }
+
+    public interface ViewHolderFactory<T extends BasicViewHolder> {
+        T createViewHolder(LayoutInflater inflater, ViewGroup parent);
     }
 
     public BasicViewHolder(View itemView) {
         super(itemView);
     }
 
-    public void setActionListener(ActionListener listener) {
-        this.mActionListener = listener;
+    public void bind(Item item, int position) {
+        this.mItem = item;
     }
 
-    public ActionListener getActionListener() {
-        return mActionListener;
+    public Item getItem() {
+        return this.mItem;
     }
 }
