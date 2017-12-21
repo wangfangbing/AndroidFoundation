@@ -24,8 +24,8 @@ public class BasicAdapter extends RecyclerView.Adapter<BasicViewHolder> {
     private List mDataList = new ArrayList();
     private ViewHolderInfoManager viewHolderInfoManager = new ViewHolderInfoManager();
 
-    public void register(@NonNull Class itemClass, @NonNull ViewHolderFactory factory, @Nullable ActionListener listener) {
-        viewHolderInfoManager.register(itemClass, factory, listener);
+    public boolean register(@NonNull Class itemClass, @NonNull ViewHolderFactory factory, @Nullable ActionListener listener) {
+        return viewHolderInfoManager.register(itemClass, factory, listener);
     }
 
     @Override
@@ -52,6 +52,13 @@ public class BasicAdapter extends RecyclerView.Adapter<BasicViewHolder> {
         return mDataList;
     }
 
+    public int getPosition(Object item) {
+        if (item == null) {
+            return -1;
+        }
+        return mDataList.indexOf(item);
+    }
+
     @Override
     public int getItemViewType(int position) {
         Class itemClass = mDataList.get(position).getClass();
@@ -63,10 +70,10 @@ public class BasicAdapter extends RecyclerView.Adapter<BasicViewHolder> {
     }
 
     /**
-     * append a item
+     * appendItem a item
      * @param item
      */
-    public void append(@NonNull Object item) {
+    public void appendItem(@NonNull Object item) {
         if (item == null) {
             return;
         }
@@ -76,9 +83,36 @@ public class BasicAdapter extends RecyclerView.Adapter<BasicViewHolder> {
         notifyItemRangeInserted(startPosition, 1);
     }
 
+    public void insertItem(@NonNull Object item, int position) {
+        if (item == null) {
+            return;
+        }
+        checkNotList(item);
+        int startPosition = position;
+        if (position < 0) {
+            startPosition = 0;
+        } else if (position > mDataList.size()) {
+            startPosition = mDataList.size();
+        }
+        mDataList.add(startPosition, item);
+        notifyItemInserted(startPosition);
+    }
+
+    public void removeItem(Object item) {
+        if (item == null) {
+            return;
+        }
+        checkNotList(item);
+        int startPosition = getPosition(item);
+        if (startPosition >= 0) { //find it
+            mDataList.remove(startPosition);
+            notifyItemRangeRemoved(startPosition, 1);
+        }
+    }
+
     private void checkNotList(Object item) {
         if (item instanceof List) {
-            throw new RuntimeException("cannot append an item which type is List to current DataList");
+            throw new RuntimeException("cannot appendItem an item which type is List to current DataList");
         }
     }
 

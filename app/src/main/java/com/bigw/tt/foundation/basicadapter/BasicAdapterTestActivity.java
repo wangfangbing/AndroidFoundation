@@ -3,8 +3,6 @@ package com.bigw.tt.foundation.basicadapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,7 +16,7 @@ import com.bigw.tt.fundamentallib.adapter.BasicAdapter;
  * Created by bigw on 15/12/2017.
  */
 
-public class BasicAdapterTestActivity extends AppCompatActivity implements View.OnClickListener {
+public class BasicAdapterTestActivity extends AppCompatActivity {
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, BasicAdapterTestActivity.class));
@@ -39,20 +37,25 @@ public class BasicAdapterTestActivity extends AppCompatActivity implements View.
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic_adpater);
-        findViewById(R.id.append).setOnClickListener(this);
 
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new BasicAdapter();
         mAdapter.register(String.class, new StringViewHolder.Factory(), null);
         mRecyclerView.setAdapter(mAdapter);
+
+        findViewById(R.id.append).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAdapter.appendItem("string");
+            }
+        });
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.append) {
-            mAdapter.append(StringItemGenerator.next());
+    private StringViewHolder.ActionListener mActionListener = new StringViewHolder.ActionListener() {
+
+        @Override
+        public void onItemClicked(String s, int adapterPosition) {
         }
-    }
-
+    };
 }

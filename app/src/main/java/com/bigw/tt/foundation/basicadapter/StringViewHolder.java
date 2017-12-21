@@ -17,7 +17,7 @@ public class StringViewHolder extends BasicViewHolder<String, StringViewHolder.A
 
     public StringViewHolder(View itemView) {
         super(itemView);
-        mStringText = itemView.findViewById(R.id.text);
+        mStringText = itemView.findViewById(R.id.append);
     }
 
     @Override
