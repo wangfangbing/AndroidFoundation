@@ -42,12 +42,25 @@ public class BasicAdapterTestActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new BasicAdapter();
         mAdapter.register(String.class, new StringViewHolder.Factory(), null);
+        mAdapter.register(Double.class, new DoubleViewHolder.DoubleViewHolderFactory(),  null);
         mRecyclerView.setAdapter(mAdapter);
 
         findViewById(R.id.append).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.appendItem("string");
+                mAdapter.appendItem(StringItemGenerator.next());
+            }
+        });
+        findViewById(R.id.insert).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAdapter.insertItem(DoubleItemGenerator.next(), 0);
+            }
+        });
+        findViewById(R.id.remove).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAdapter.removeItem(mAdapter.getItemCount() - 1);
             }
         });
     }
@@ -56,6 +69,20 @@ public class BasicAdapterTestActivity extends AppCompatActivity {
 
         @Override
         public void onItemClicked(String s, int adapterPosition) {
+            //do nothing
         }
     };
+
+    private static class StringItemGenerator {
+        private static int COUNT = 0;
+        public static String next() {
+            return "string" + COUNT++;
+        }
+    }
+
+    private static class DoubleItemGenerator {
+        public static Double next() {
+            return Math.random() * 10;
+        }
+    }
 }

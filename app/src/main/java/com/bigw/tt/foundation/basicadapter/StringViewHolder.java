@@ -30,7 +30,9 @@ public class StringViewHolder extends BasicViewHolder<String, StringViewHolder.A
     private View.OnClickListener mStringViewClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            getActionListener().onItemClicked(getItem(), getAdapterPosition());
+            if (getActionListener() != null) {
+                getActionListener().onItemClicked(getItem(), getAdapterPosition());
+            }
         }
     };
 
