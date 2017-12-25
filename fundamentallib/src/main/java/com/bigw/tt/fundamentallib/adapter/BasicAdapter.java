@@ -10,6 +10,7 @@ import com.bigw.tt.fundamentallib.viewholder.BasicViewHolder;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.bigw.tt.fundamentallib.viewholder.BasicViewHolder.ActionListener;
@@ -83,6 +84,15 @@ public class BasicAdapter extends RecyclerView.Adapter<BasicViewHolder> {
         notifyItemRangeInserted(startPosition, 1);
     }
 
+    public void appendItems(@NonNull List dataList) {
+        if (dataList == null || dataList.size() == 0) {
+            return;
+        }
+        int startPosition = mDataList.size();
+        mDataList.addAll(dataList);
+        notifyItemRangeInserted(startPosition, dataList.size());
+    }
+
     public void insertItem(@NonNull Object item, int position) {
         if (item == null) {
             return;
@@ -98,6 +108,20 @@ public class BasicAdapter extends RecyclerView.Adapter<BasicViewHolder> {
         notifyItemInserted(startPosition);
     }
 
+    public void insertItems(@NonNull List dataList, int position) {
+        if (dataList == null || dataList.size() == 0) {
+            return;
+        }
+        int startPosition = position;
+        if (position < 0) {
+            startPosition = 0;
+        } else if (position > mDataList.size()) {
+            startPosition = mDataList.size();
+        }
+        mDataList.addAll(startPosition, dataList);
+        notifyItemRangeInserted(startPosition, dataList.size());
+    }
+
     public void removeItem(Object item) {
         if (item == null) {
             return;
@@ -106,8 +130,33 @@ public class BasicAdapter extends RecyclerView.Adapter<BasicViewHolder> {
         int startPosition = getPosition(item);
         if (startPosition >= 0) { //find it
             mDataList.remove(startPosition);
-            notifyItemRangeRemoved(startPosition, 1);
+            notifyItemRemoved(startPosition);
         }
+    }
+
+    public void removeItem(int position) {
+        if (position < 0 || position >= mDataList.size()) {
+            return;
+        }
+        mDataList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    /**
+     * return the item that has been deleted
+     */
+    public int removeItems(int position, int deleteCount) {
+        if (position < 0 || position >= mDataList.size()) {
+            return 0;
+        }
+        int realDeleteCount = Math.min(mDataList.size() - position, deleteCount);
+        for(int index = 0; index < realDeleteCount; index++) {
+            mDataList.remove(position);
+        }
+        if (realDeleteCount > 0) {
+            notifyItemRangeRemoved(position, realDeleteCount);
+        }
+        return realDeleteCount;
     }
 
     private void checkNotList(Object item) {
@@ -115,5 +164,4 @@ public class BasicAdapter extends RecyclerView.Adapter<BasicViewHolder> {
             throw new RuntimeException("cannot appendItem an item which type is List to current DataList");
         }
     }
-
 }
