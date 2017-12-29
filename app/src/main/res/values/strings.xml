@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidFoundation</string>
+    <string name="empty_data_tips">no data</string>
+    <string name="error_data_tips">error data</string>
 </resources>

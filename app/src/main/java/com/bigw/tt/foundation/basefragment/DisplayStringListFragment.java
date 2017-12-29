@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.bigw.tt.foundation.R;
 import com.bigw.tt.foundation.common.StringViewHolder;

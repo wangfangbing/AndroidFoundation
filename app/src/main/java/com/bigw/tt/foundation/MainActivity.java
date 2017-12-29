@@ -1,11 +1,10 @@
 package com.bigw.tt.foundation;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import com.bigw.tt.foundation.basefragment.BaseFragmentExampleActivity;
 import com.bigw.tt.foundation.basefragment.BaseFragmentInViewPagerActivity;
-import com.bigw.tt.foundation.basicadapter.BasicAdapterTestActivity;
+import com.bigw.tt.foundation.basefragment.SwitchContentViewActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //BasicAdapterTestActivity.start(this);
-        BaseFragmentExampleActivity.start(this);
-        //BaseFragmentInViewPagerActivity.start(this);
+        BaseFragmentInViewPagerActivity.start(this);
+        //SwitchContentViewActivity.start(this);
     }
 }

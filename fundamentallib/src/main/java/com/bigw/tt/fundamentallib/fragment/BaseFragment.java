@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bigw.tt.fundamentallib.placeholderview.ContentViewSwitcher;
+import com.bigw.tt.fundamentallib.placeholderview.DefaultPlaceHolderViewFactory;
+import com.bigw.tt.fundamentallib.placeholderview.PlaceHolderViewFactory;
 import com.bigw.tt.fundamentallib.widgets.SwipeRefreshLayoutProxy;
 
 /**
@@ -27,6 +29,9 @@ public abstract class BaseFragment extends Fragment {
     private SwipeRefreshLayoutProxy mSwipeRefreshLayoutProxy;
     private ContentViewSwitcher mContentViewSwitcher;
 
+    private PlaceHolderViewFactory mErrorPlaceHolderViewFactory;
+    private PlaceHolderViewFactory mEmptyPlaceHolderViewFactory;
+
     public void setContentViewSwitcher(ContentViewSwitcher switcher) {
         this.mContentViewSwitcher = switcher;
     }
@@ -35,6 +40,22 @@ public abstract class BaseFragment extends Fragment {
         if (refreshLayout != null) {
             mSwipeRefreshLayoutProxy = new SwipeRefreshLayoutProxy(refreshLayout);
         }
+    }
+
+    public PlaceHolderViewFactory getErrorPlaceHolderViewFactory() {
+        return mErrorPlaceHolderViewFactory;
+    }
+
+    public void setErrorPlaceHolderViewFactory(PlaceHolderViewFactory mErrorPlaceHolderViewFactory) {
+        this.mErrorPlaceHolderViewFactory = mErrorPlaceHolderViewFactory;
+    }
+
+    public PlaceHolderViewFactory getEmptyPlaceHolderViewFactory() {
+        return mEmptyPlaceHolderViewFactory;
+    }
+
+    public void setEmptyPlaceHolderViewFactory(PlaceHolderViewFactory mEmptyPlaceHolderViewFactory) {
+        this.mEmptyPlaceHolderViewFactory = mEmptyPlaceHolderViewFactory;
     }
 
     public SwipeRefreshLayout getSwipeRefreshLayout() {
@@ -60,7 +81,7 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    public void switchContentView() {
+    public void switchToContentView() {
         if (getContentViewSwitcher() != null) {
             getContentViewSwitcher().switchToContentView();
         }
@@ -140,6 +161,8 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroyView() {
         mSwipeRefreshLayoutProxy = null;
         mContentViewSwitcher = null;
+        mEmptyPlaceHolderViewFactory = null;
+        mErrorPlaceHolderViewFactory = null;
         super.onDestroyView();
     }
 
@@ -184,6 +207,15 @@ public abstract class BaseFragment extends Fragment {
                 }
             });
         }
+        if (getEmptyPlaceHolderViewFactory() == null) {
+            setEmptyPlaceHolderViewFactory(new DefaultPlaceHolderViewFactory());
+        }
+        contentViewSwitcher.setEmptyPlaceHolderViewFactory(getEmptyPlaceHolderViewFactory());
+
+        if (getErrorPlaceHolderViewFactory() == null) {
+            setErrorPlaceHolderViewFactory(new DefaultPlaceHolderViewFactory());
+        }
+        contentViewSwitcher.setErrorPlaceHolderViewFactory(getErrorPlaceHolderViewFactory());
     }
 
 }
