@@ -29,7 +29,7 @@ public class DoubleViewHolder extends BasicViewHolder<Double, DoubleViewHolder.A
     public static class DoubleViewHolderFactory implements BasicViewHolder.ViewHolderFactory<DoubleViewHolder> {
         @Override
         public DoubleViewHolder createViewHolder(LayoutInflater inflater, ViewGroup parent) {
-            View itemView = inflater.inflate(R.layout.layout_string_view_holder, parent, false);
+            View itemView = inflater.inflate(R.layout.test_layout_string_view_holder, parent, false);
             return new DoubleViewHolder(itemView);
         }
     }

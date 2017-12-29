@@ -95,22 +95,22 @@ public class ViewHolderInfoManager {
         }
 
         @VisibleForTesting
-        public int getId() {
+        int getId() {
             return id;
         }
 
         @VisibleForTesting
-        public Class getItemClass() {
+        Class getItemClass() {
             return itemClass;
         }
 
         @VisibleForTesting
-        public ActionListener getActionListener() {
+        ActionListener getActionListener() {
             return actionListener;
         }
 
         @VisibleForTesting
-        public ViewHolderFactory getFactory() {
+        ViewHolderFactory getFactory() {
             return factory;
         }
     }

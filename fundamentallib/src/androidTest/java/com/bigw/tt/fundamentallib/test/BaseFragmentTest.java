@@ -5,11 +5,17 @@ import android.support.test.annotation.UiThreadTest;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.bigw.tt.fundamentallib.placeholderview.ContentViewSwitcher;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 /**
@@ -17,7 +23,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class TestBaseFragmentActivityTest {
+public class BaseFragmentTest {
 
     private DisplayStringListFragment mFragment;
 
@@ -29,11 +35,18 @@ public class TestBaseFragmentActivityTest {
         mActivityRule.launchActivity(new Intent());
         mFragment = DisplayStringListFragment.newInstance();
         mActivityRule.getActivity().getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragmentContainer, mFragment).commit();
+                .add(R.id.fragmentContainer, mFragment).commitAllowingStateLoss();
+    }
+
+    @Test @UiThreadTest
+    public void SwipeRefreshLayout_add() {
+        SwipeRefreshLayout refreshLayout = mFragment.getSwipeRefreshLayout();
+        assertNotNull(refreshLayout);
+        assertThat(refreshLayout, is(mFragment.getView()));
     }
 
     @Test @UiThreadTest
     public void defaultContentViewSwitcher_setParent() {
-        assertTrue(mFragment.isAdded());
+
     }
 }

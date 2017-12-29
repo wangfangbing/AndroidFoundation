@@ -1,4 +1,4 @@
-package com.bigw.tt.fundamentallib.widget;
+package com.bigw.tt.fundamentallib.placeholderview;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
@@ -25,9 +25,7 @@ public abstract class PlaceHolderView {
         return mView;
     }
 
-    public abstract void show(@DrawableRes int drawableRes, @StringRes int stringRes);
-
-    public abstract void show(Drawable drawable, CharSequence cs);
+    public abstract void set(Drawable drawable, CharSequence cs, View.OnClickListener listener);
 
     protected abstract  @LayoutRes int getLayoutRes();
 }

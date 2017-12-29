@@ -1,2 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bigw.tt.fundamentallib" />
+    package="com.bigw.tt.fundamentallib" >
+    <application
+        android:theme="@style/AppTheme">
+        <activity android:name=".test.TestBaseFragmentActivity"/>
+    </application>
+</manifest>

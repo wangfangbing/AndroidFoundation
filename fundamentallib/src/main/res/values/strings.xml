@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FundamentalLib</string>
+    <string name="empty_place_holder_view_tips">empty data tips</string>
+    <string name="error_place_holder_view_tips">error tips</string>
 </resources>

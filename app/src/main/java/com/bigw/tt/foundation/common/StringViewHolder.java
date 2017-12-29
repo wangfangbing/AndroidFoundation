@@ -1,4 +1,4 @@
-package com.bigw.tt.foundation.basicadapter;
+package com.bigw.tt.foundation.common;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +43,7 @@ public class StringViewHolder extends BasicViewHolder<String, StringViewHolder.A
     public static class Factory implements ViewHolderFactory {
         @Override
         public BasicViewHolder createViewHolder(LayoutInflater inflater, ViewGroup parent) {
-            View contentView = inflater.inflate(R.layout.layout_string_view_holder, parent, false);
+            View contentView = inflater.inflate(R.layout.test_layout_string_view_holder, parent, false);
             return new StringViewHolder(contentView);
         }
     }

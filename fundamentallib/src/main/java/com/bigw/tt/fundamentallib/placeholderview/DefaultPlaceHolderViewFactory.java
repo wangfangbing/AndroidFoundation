@@ -14,7 +14,7 @@ import com.bigw.tt.fundamentallib.R;
  * Created by bigw on 27/12/2017.
  */
 
-public class DefaultErrorPlaceHolderViewFactory implements PlaceHolderViewFactory {
+public class DefaultPlaceHolderViewFactory implements PlaceHolderViewFactory {
 
     @Override
     public PlaceHolderView createPlaceHolderView(ViewStub viewStub) {
@@ -27,20 +27,13 @@ public class DefaultErrorPlaceHolderViewFactory implements PlaceHolderViewFactor
         }
 
         @Override
-        public void show(int drawableRes, int stringRes) {
-            Context context = getView().getContext();
-            Drawable drawable = drawableRes > 0 ? context.getResources().getDrawable(drawableRes) : null;
-            CharSequence cs = stringRes > 0 ? context.getString(stringRes) : null;
-            show(drawable, cs);
-        }
-
-        @Override
-        public void show(Drawable drawable, CharSequence cs) {
+        public void set(Drawable drawable, CharSequence cs, View.OnClickListener listener) {
             ImageView imageView = getView().findViewById(R.id.image);
             if (drawable == null) {
                 imageView.setVisibility(View.GONE);
             } else {
                 imageView.setImageDrawable(drawable);
+                imageView.setOnClickListener(listener);
                 imageView.setVisibility(View.VISIBLE);
             }
 
@@ -49,6 +42,7 @@ public class DefaultErrorPlaceHolderViewFactory implements PlaceHolderViewFactor
                 textView.setVisibility(View.GONE);
             } else {
                 textView.setText(cs);
+                textView.setOnClickListener(listener);
                 textView.setVisibility(View.VISIBLE);
             }
         }

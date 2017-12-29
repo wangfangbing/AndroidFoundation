@@ -1,4 +1,4 @@
-package com.bigw.tt.foundation.basefragment;
+package com.bigw.tt.fundamentallib.test;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bigw.tt.foundation.R;
-import com.bigw.tt.foundation.common.StringViewHolder;
+import com.bigw.tt.fundamentallib.R;
 import com.bigw.tt.fundamentallib.adapter.BasicAdapter;
 import com.bigw.tt.fundamentallib.fragment.BaseFragment;
+import com.bigw.tt.fundamentallib.test.common.StringViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +30,9 @@ public class DisplayStringListFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
     private BasicAdapter mAdapter;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_display_string_list, container, false);
+    protected View onCreateFragmentView(LayoutInflater inflater, @Nullable Bundle savedInstanceState) {
+        View contentView = inflater.inflate(R.layout.test_fragment_display_string_list, null);
         mRecyclerView = contentView.findViewById(R.id.recyclerView);
         Log.d("TestLog", "onCreateView " + contentView);
         return contentView;

@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.bigw.tt.foundation.R;
+import com.bigw.tt.foundation.common.StringViewHolder;
 import com.bigw.tt.fundamentallib.adapter.BasicAdapter;
 
 /**
