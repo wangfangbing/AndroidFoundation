@@ -42,6 +42,29 @@ public class BasicAdapter extends RecyclerView.Adapter<BasicViewHolder> {
     }
 
     @Override
+    public void onViewRecycled(BasicViewHolder holder) {
+        super.onViewRecycled(holder);
+        holder.onViewRecycled();
+    }
+
+    @Override
+    public boolean onFailedToRecycleView(BasicViewHolder holder) {
+        return holder.onFailedToRecycleView();
+    }
+
+    @Override
+    public void onViewAttachedToWindow(BasicViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        holder.onViewAttachedToWindow();
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(BasicViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        holder.onViewDetachedFromWindow();
+    }
+
+    @Override
     public int getItemCount() {
         return mDataList.size();
     }

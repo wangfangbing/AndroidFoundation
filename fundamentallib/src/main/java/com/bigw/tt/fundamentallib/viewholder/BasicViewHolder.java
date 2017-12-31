@@ -42,4 +42,14 @@ public abstract class BasicViewHolder<Item, Listener extends BasicViewHolder.Act
     public Item getItem() {
         return this.mItem;
     }
+
+    public void onViewRecycled() {}
+
+    public boolean onFailedToRecycleView() {
+        return false;
+    }
+
+    public void onViewAttachedToWindow() {}
+
+    public void onViewDetachedFromWindow() {}
 }
