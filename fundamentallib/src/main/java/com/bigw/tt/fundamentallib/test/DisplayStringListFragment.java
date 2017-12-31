@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.bigw.tt.fundamentallib.R;
 import com.bigw.tt.fundamentallib.adapter.BasicAdapter;
@@ -47,7 +46,7 @@ public class DisplayStringListFragment extends BaseFragment {
         mAdapter.register(String.class, new StringViewHolder.Factory(), null);
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.appendItems(generateStringList());
+        mAdapter.appendDataList(generateStringList());
     }
 
     private List<String> generateStringList() {

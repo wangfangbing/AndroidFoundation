@@ -69,7 +69,7 @@ public class BaseFragmentInViewPagerActivity extends AppCompatActivity {
 
         @Override
         public BaseFragment getItem(int position) {
-            return DisplayStringListFragment.newInstance();
+            return DisplayStringListFragment1.newInstance();
         }
 
         @Override

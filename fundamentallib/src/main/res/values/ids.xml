@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="id_empty_view_stub" type="id"/>
-    <item name="id_empty_view_stub_inflate" type="id"/>
+    <item name="id_content_view_stub" type="id" />
     <item name="id_error_view_stub" type="id"/>
-    <item name="id_error_view_stub_inflate" type="id"/>
 </resources>

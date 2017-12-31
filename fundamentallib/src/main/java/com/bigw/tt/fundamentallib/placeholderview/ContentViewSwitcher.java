@@ -23,10 +23,6 @@ import com.bigw.tt.fundamentallib.R;
 
 public class ContentViewSwitcher extends FrameLayout {
 
-    private static final int DEFAULT_ERROR_TIPS = R.string.error_place_holder_view_tips;
-    private static final int DEFAULT_EMPTY_TIPS = R.string.empty_place_holder_view_tips;
-    private static final int DEFAULT_DRAWABLE_RES = R.drawable.ic_launcher_foreground;
-
     private View mContentView;
     private PlaceHolderViewFactory mEmptyPlaceHolderViewFactory;
     private PlaceHolderViewFactory mErrorPlaceHolderViewFactory;
@@ -114,7 +110,7 @@ public class ContentViewSwitcher extends FrameLayout {
     }
 
     public void switchToEmptyView() {
-        switchToEmptyView(DEFAULT_DRAWABLE_RES, DEFAULT_EMPTY_TIPS);
+        switchToEmptyView(0, 0);
     }
 
     public void switchToEmptyView(@DrawableRes int drawableRes, @StringRes int emptyTips) {
@@ -140,7 +136,7 @@ public class ContentViewSwitcher extends FrameLayout {
     }
 
     public void switchToErrorView() {
-        switchToErrorView(DEFAULT_DRAWABLE_RES, DEFAULT_ERROR_TIPS);
+        switchToErrorView(0, 0);
     }
 
     public void switchToErrorView(@DrawableRes int drawableRes, @StringRes int errorTips) {
@@ -170,6 +166,8 @@ public class ContentViewSwitcher extends FrameLayout {
         addView(emptyViewStub);
         ViewStub errorViewStub = createViewStub(R.id.id_error_view_stub);
         addView(errorViewStub);
+        ViewStub contentViewStub = createViewStub(R.id.id_content_view_stub);
+        addView(contentViewStub);
     }
 
     @VisibleForTesting

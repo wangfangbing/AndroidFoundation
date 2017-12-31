@@ -123,13 +123,12 @@ public abstract class BaseFragment extends Fragment {
 
         if (getSwipeRefreshLayout() == null) {
             SwipeRefreshLayout swipeRefreshLayout = createSwipeRefreshLayout(getContext());
-            ensureSwipeRefreshLayoutParams(swipeRefreshLayout);
             setSwipeRefreshLayout(swipeRefreshLayout);
-
             result = swipeRefreshLayout;
         } else {
             result = customView;
         }
+        setupSwipeRefreshLayout();
 
         if (getContentViewSwitcher() == null) {
             ContentViewSwitcher contentViewSwitcher = new ContentViewSwitcher(getContext());
@@ -166,14 +165,13 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroyView();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
     protected abstract View onCreateFragmentView(LayoutInflater inflater, @Nullable Bundle savedInstanceState);
 
     protected void onErrorViewClicked(View view) {
+        //do nothing
+    }
+
+    protected void onRefreshFragment() {
         //do nothing
     }
 
@@ -184,11 +182,18 @@ public abstract class BaseFragment extends Fragment {
         return refreshLayout;
     }
 
-    private void ensureSwipeRefreshLayoutParams(SwipeRefreshLayout refreshLayout) {
-        if (refreshLayout.getLayoutParams() == null) {
-            refreshLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+    private void setupSwipeRefreshLayout() {
+        SwipeRefreshLayout swipeRefreshLayout = getSwipeRefreshLayout();
+        if (swipeRefreshLayout.getLayoutParams() == null) {
+            swipeRefreshLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT));
         }
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                onRefreshFragment();
+            }
+        });
     }
 
     private void setupContentViewSwitcher(ViewGroup parent, View contentView) {

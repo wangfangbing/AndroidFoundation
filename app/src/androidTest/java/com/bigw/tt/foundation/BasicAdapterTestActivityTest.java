@@ -79,17 +79,17 @@ public class BasicAdapterTestActivityTest {
         List newDataList = new ArrayList();
         newDataList.add("s2");
         newDataList.add("s3");
-        adapter.appendItems(newDataList);
+        adapter.appendDataList(newDataList);
         assertEquals(3, adapter.getItemCount());
 
         List nullList = null;
-        adapter.appendItems(nullList);
+        adapter.appendDataList(nullList);
         assertEquals(3, adapter.getItemCount());
 
         List newDataList1 = new ArrayList();
         newDataList1.add("s4");
         newDataList1.add("s5");
-        adapter.appendItems(newDataList1);
+        adapter.appendDataList(newDataList1);
         assertEquals(5, adapter.getItemCount());
     }
 
@@ -124,7 +124,7 @@ public class BasicAdapterTestActivityTest {
         String s4 = "s4";
         adapter.insertItem(s4, 1);
         assertEquals(4, adapter.getItemCount());
-        assertEquals(s4, dataList.get(adapter.getPosition(s4)));
+        assertEquals(s4, dataList.get(adapter.getAdapterPosition(s4)));
     }
 
     @Test @UiThreadTest
@@ -142,7 +142,7 @@ public class BasicAdapterTestActivityTest {
         List dataList_1 = new ArrayList();
         dataList_1.add("s3");
         dataList_1.add("s4");
-        adapter.insertItems(dataList_1, 2);
+        adapter.insertDataList(dataList_1, 2);
         assertEquals(4, adapter.getItemCount());
         assertEquals("s3", dataList.get(2));
         assertEquals("s4", dataList.get(3));
@@ -150,7 +150,7 @@ public class BasicAdapterTestActivityTest {
         List dataList_2 = new ArrayList();
         dataList_2.add("s5");
         dataList_2.add("s6");
-        adapter.insertItems(dataList_2, 0);
+        adapter.insertDataList(dataList_2, 0);
         assertEquals(6, adapter.getItemCount());
         assertEquals("s5", dataList.get(0));
         assertEquals("s6", dataList.get(1));
@@ -158,7 +158,7 @@ public class BasicAdapterTestActivityTest {
         List dataList_3 = new ArrayList();
         dataList_3.add("s7");
         dataList_3.add("s8");
-        adapter.insertItems(dataList_3, -1);
+        adapter.insertDataList(dataList_3, -1);
         assertEquals(8, adapter.getItemCount());
         assertEquals("s7", dataList.get(0));
         assertEquals("s8", dataList.get(1));
@@ -166,13 +166,13 @@ public class BasicAdapterTestActivityTest {
         List dataList_4 = new ArrayList();
         dataList_4.add("s9");
         dataList_4.add("s10");
-        adapter.insertItems(dataList_4, 100);
+        adapter.insertDataList(dataList_4, 100);
         assertEquals(10, adapter.getItemCount());
         assertEquals("s9", dataList.get(8));
         assertEquals("s10", dataList.get(9));
 
         List nullList = null;
-        adapter.insertItems(nullList, 0);
+        adapter.insertDataList(nullList, 0);
         assertEquals(10, adapter.getItemCount());
     }
 
@@ -248,7 +248,7 @@ public class BasicAdapterTestActivityTest {
         for(int i = 0; i < 100; i++) {
             newDataList.add("String" + i);
         }
-        adapter.appendItems(newDataList);
+        adapter.appendDataList(newDataList);
 
         adapter.removeItems(-1, 1);
         adapter.removeItems(200, 1);
